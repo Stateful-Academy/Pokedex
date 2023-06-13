@@ -15,11 +15,12 @@ class NetworkingController {
     static func fetchPokemon(with searchTerm: String, completion: @escaping (Pokemon?) -> Void) {
         
         guard let baseURL = URL(string: baseURLString) else {return}
-        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        urlComponents?.path = "/api/v2/pokemon/\(searchTerm.lowercased())"
-
-        guard let finalURL = urlComponents?.url else {return}
-        print(finalURL)
+        let finalURL = baseURL.appendingPathComponent("/api/v2/pokemon/\(searchTerm.lowercased())")
+//        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+//        urlComponents?.path = "/api/v2/pokemon/\(searchTerm.lowercased())"
+//
+//        guard let finalURL = urlComponents?.url else {return}
+//        print(finalURL)
         
         URLSession.shared.dataTask(with: finalURL) { dTaskData, _, error in
             if let error = error {
